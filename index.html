@@ -3,201 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>よくあるご質問</title>
+    <title>JBレンタカー FAQ</title>
     <style>
         body {
             font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
         }
-        .chat-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .chat-header {
-            background-color: #007bff;
+        header {
+            background-color: #005cb9;
             color: white;
-            padding: 15px;
+            padding: 20px 0;
+            margin-bottom: 30px;
             text-align: center;
+            border-radius: 8px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 5px;
+        }
+        .category {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #005cb9;
+            font-size: 20px;
+            font-weight: bold;
+            color: #005cb9;
+        }
+        .faq-list {
+            list-style: none;
+            padding: 0;
+        }
+        .faq-item {
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .question {
             font-weight: bold;
             font-size: 18px;
-        }
-        .chat-messages {
-            background-color: white;
-            padding: 20px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .message {
+            color: #005cb9;
             margin-bottom: 15px;
-            clear: both;
+            display: flex;
+            align-items: center;
         }
-        .user-message {
-            float: right;
-            background-color: #007bff;
+        .question:before {
+            content: "Q";
+            background-color: #005cb9;
             color: white;
-            border-radius: 18px 18px 0 18px;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 16px;
         }
-        .staff-message {
-            float: left;
-            background-color: #e6e6e6;
-            color: #333;
-            border-radius: 18px 18px 18px 0;
+        .answer {
+            padding-left: 43px;
+            position: relative;
+            margin-top: 10px;
         }
-        .message-content {
-            padding: 10px 15px;
-            max-width: 80%;
-            word-wrap: break-word;
+        .answer:before {
+            content: "A";
+            background-color: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            left: 0;
+            font-size: 16px;
         }
-        .message-time {
-            font-size: 12px;
-            color: #999;
-            margin-top: 5px;
-            text-align: right;
+        .highlight {
+            background-color: #ffefef;
+            padding: 3px 6px;
+            border-radius: 4px;
+            margin: 2px 0;
+            display: inline-block;
         }
-        .emoji {
-            margin-left: 5px;
+        .list-item {
+            margin-bottom: 8px;
         }
-        .clearfix::after {
-            content: "";
-            display: table;
-            clear: both;
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
+            padding-bottom: 30px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #004499;
+            text-decoration: underline;
+        }
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .faq-item {
+                padding: 20px;
+            }
+            .question {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            よくあるご質問
-        </div>
-        <div class="chat-messages" id="chat">
-            <!-- Messages will be inserted here by JavaScript -->
-        </div>
+    <div class="container">
+        <header>
+            <h1>JBレンタカー 石巻店</h1>
+            <div class="subtitle">よくあるご質問</div>
+        </header>
+
+        <div class="category">ご利用期間・料金について</div>
+        <ul class="faq-list">
+            <li class="faq-item">
+                <div class="question">何日間から借りられるの？</div>
+                <div class="answer">
+                    当店は中長期専門のレンタカーでございます。そのため、<span class="highlight">7日間以上</span>からのご利用を承っております。
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">料金の計算方法について教えてください。</div>
+                <div class="answer">
+                    当店では、1日を1泊として計算しております。例えば、1月1日から最短プランの7日間でご契約いただいた場合、1月8日までご利用可能です。また、朝のお貸出から夕方のご返却の場合でも、料金に変更はございません。詳細は<a href="https://jbrentacar.github.io/FeeCalculation/" target="_blank">セルフ御見積</a>からご確認ください。
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">お支払いのタイミングは？</div>
+                <div class="answer">
+                    車両お引渡し時にクレジットカード決済となります💳 <span class="highlight">現金決済は原則として承っておりません。</span>
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">途中で返却する場合、料金はどうなりますか？</div>
+                <div class="answer">
+                    <span class="warning">途中返却された場合でも、返金はいたしかねますので</span>、予めご了承ください。
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">キャンセルはできますか？</div>
+                <div class="answer">
+                    キャンセルは可能ですが、<span class="highlight">ご利用開始日の7日前からキャンセル料金が発生</span>致します。詳細はご契約時の約款をご確認ください。
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">走行制限は？</div>
+                <div class="answer">
+                    ご利用日数に応じて以下の走行距離制限がございます：
+                    <div class="list-item">・24時間：300㎞</div>
+                    <div class="list-item">・1週間：1,000㎞</div>
+                    <div class="list-item">・14～30日間：3,000㎞</div>
+                    制限を超えて走行された場合、<span class="highlight">1㎞あたり10円の追加料金</span>を申し受けます。
+                </div>
+            </li>
+        </ul>
+
+        <div class="category">車両について</div>
+        <ul class="faq-list">
+            <li class="faq-item">
+                <div class="question">4駆の車はありますか？</div>
+                <div class="answer">
+                    基本的には2駆仕様をご案内しておりますが、4駆をご希望の場合はお気軽にお申し付けください。なお、空き状況によってはご期待に添えない場合がございますので、ご了承ください。
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">喫煙車ありますか？</div>
+                <div class="answer">
+                    当店のレンタカーは<span class="highlight">全車両禁煙車</span>でございます🚭
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">ISOFIX対応車やチャイルドシートの貸出はある？</div>
+                <div class="answer">
+                    ISOFIX対応車をご用意しております。詳細は事前にお問い合わせください。ただし、<span class="warning">チャイルドシートの貸出は行っておりません</span>ので、お客様ご自身でご準備をお願いいたします。
+                </div>
+            </li>
+        </ul>
+
+        <div class="category">ご利用条件について</div>
+        <ul class="faq-list">
+            <li class="faq-item">
+                <div class="question">運転できる人数は？料金変わる？</div>
+                <div class="answer">
+                    運転免許証をご提示いただいた方全員が運転可能です。運転人数に伴う料金の変更はございません。ただし、<span class="warning">運転免許証をご提示いただいていない方が運転された場合の事故等は補償の対象外</span>となりますのでご注意ください。
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">ペットと一緒に乗っていいですか？</div>
+                <div class="answer">
+                    ペット同乗による、臭い・汚れが発生した場合、<span class="highlight">別途特別清掃料</span>を頂きます。ペットの同乗はご遠慮ください🐕🚫
+                </div>
+            </li>
+            
+            <li class="faq-item">
+                <div class="question">1年くらい借りたいです。</div>
+                <div class="answer">
+                    1年でのご契約は可能です。但し、車検🔧やスタッドレスタイヤ脱着🌨️の際には、<span class="highlight">店舗にご来店の上、車両の入れ替え、タイヤ交換等</span>がございます。予めご了承ください。
+                </div>
+            </li>
+        </ul>
+
+        <div class="category">店舗・サービスについて</div>
+        <ul class="faq-list">
+            <li class="faq-item">
+                <div class="question">石巻以外に店舗はありますか？</div>
+                <div class="answer">
+                    現時点では、宮城県内において石巻店のみの営業となっております。
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">いつなら空きがありますか？</div>
+                <div class="answer">
+                    現在ご利用頂いているお客様のご返却状況が未定のうちは新規ご予約をお取りしておりません。ご利用日の概ね<span class="highlight">10日前を目安</span>にお問い合わせ頂けるとご案内できることが多いです😓
+                </div>
+            </li>
+
+            <li class="faq-item">
+                <div class="question">配送サービスについて教えてください。</div>
+                <div class="answer">
+                    <span class="highlight">30日以上のご利用</span>を対象に、宮城県内全域への無料配送を承っております。配送可能時間帯は、水曜を除く平日10時～17時です。なお、ご返却の際はJBレンタカー石巻店までお越しいただく必要がございます。
+                </div>
+            </li>
+        </ul>
+
+        <footer>
+            © JBレンタカー 石巻店 | <a href="https://jbrentacar.github.io/FeeCalculation/" target="_blank">料金シミュレーション</a>
+        </footer>
     </div>
-
-    <script>
-        // Chat messages data
-        const messages = [
-            {
-                role: "user",
-                content: "何日間から借りられるの？"
-            },
-            {
-                role: "staff",
-                content: "当店は中長期専門のレンタカーでございます。そのため、7日間以上からのご利用を承っております。"
-            },
-            {
-                role: "user",
-                content: "料金の計算方法について教えてください。"
-            },
-            {
-                role: "staff",
-                content: "当店では、1日を1泊として計算しております。例えば、1月1日から最短プランの7日間でご契約いただいた場合、1月8日までご利用可能です。また、朝のお貸出から夕方のご返却の場合でも、料金に変更はございません。詳細はメニュー画面の「セルフ御見積」からご確認ください。"
-            },
-            {
-                role: "user",
-                content: "お支払いのタイミングは？"
-            },
-            {
-                role: "staff",
-                content: "車両お引渡し時にクレジットカード決済となります💳 現金決済は原則として承っておりません。"
-            },
-            {
-                role: "user",
-                content: "石巻以外に店舗はありますか？"
-            },
-            {
-                role: "staff",
-                content: "現時点では、宮城県内において石巻店のみの営業となっております。"
-            },
-            {
-                role: "user",
-                content: "いつなら空きがありますか？"
-            },
-            {
-                role: "staff",
-                content: "現在ご利用頂いているお客様のご返却状況が未定のうちは新規ご予約をお取りしておりません。ご利用日の概ね10日前を目安にお問い合わせ頂けるとご案内できることが多いです😓"
-            },
-            {
-                role: "user",
-                content: "1年くらい借りたいです。"
-            },
-            {
-                role: "staff",
-                content: "1年でのご契約は可能です。但し、車検🔧やスタッドレスタイヤ脱着🌨️の際には、店舗にご来店の上、車両の入れ替え、タイヤ交換等がございます。予めご了承ください。"
-            },
-            {
-                role: "user",
-                content: "喫煙車ありますか？"
-            },
-            {
-                role: "staff",
-                content: "当店のレンタカーは全車両禁煙車でございます🚭"
-            },
-            {
-                role: "user",
-                content: "ペットと一緒に乗っていいですか？"
-            },
-            {
-                role: "staff",
-                content: "ペット同乗による、臭い・汚れが発生した場合、別途特別清掃料を頂きます。ペットの同乗はご遠慮ください🐕🚫"
-            },
-            {
-                role: "user",
-                content: "配送サービスについて教えてください。"
-            },
-            {
-                role: "staff",
-                content: "30日以上のご利用を対象に、宮城県内全域への無料配送を承っております。配送可能時間帯は、水曜を除く平日10時～17時です。なお、ご返却の際はJBレンタカー石巻店までお越しいただく必要がございます。"
-            },
-            {
-                role: "user",
-                content: "走行制限は？"
-            },
-            {
-                role: "staff",
-                content: "ご利用日数に応じて以下の走行距離制限がございます：\n・24時間：300㎞\n・1週間：1,000㎞\n・14～30日間：3,000㎞\n制限を超えて走行された場合、1㎞あたり10円の追加料金を申し受けます。"
-            }
-        ];
-
-        // Function to create message elements
-        function createMessageElement(message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${message.role === 'user' ? 'user-message' : 'staff-message'} clearfix`;
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'message-content';
-            contentDiv.innerHTML = message.content.replace(/\n/g, '<br>');
-            
-            messageDiv.appendChild(contentDiv);
-            
-            return messageDiv;
-        }
-
-        // Function to display messages
-        function displayMessages() {
-            const chatContainer = document.getElementById('chat');
-            
-            messages.forEach(message => {
-                const messageElement = createMessageElement(message);
-                chatContainer.appendChild(messageElement);
-            });
-            
-            // Auto scroll to bottom
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        // Initialize chat
-        window.onload = function() {
-            displayMessages();
-        };
-    </script>
 </body>
 </html>
