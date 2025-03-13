@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBレンタカー チャット</title>
+    <style>
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .chat-messages {
+            background-color: white;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 15px;
+            clear: both;
+        }
+        .user-message {
+            float: right;
+            background-color: #007bff;
+            color: white;
+            border-radius: 18px 18px 0 18px;
+        }
+        .staff-message {
+            float: left;
+            background-color: #e6e6e6;
+            color: #333;
+            border-radius: 18px 18px 18px 0;
+        }
+        .message-content {
+            padding: 10px 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .message-time {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+            text-align: right;
+        }
+        .emoji {
+            margin-left: 5px;
+        }
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            JBレンタカー 石巻店
+        </div>
+        <div class="chat-messages" id="chat">
+            <!-- Messages will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Chat messages data
+        const messages = [
+            {
+                role: "user",
+                content: "何日間から借りられるの？"
+            },
+            {
+                role: "staff",
+                content: "当店は中長期専門のレンタカーでございます。そのため、7日間以上からのご利用を承っております。"
+            },
+            {
+                role: "user",
+                content: "料金の計算方法について教えてください。"
+            },
+            {
+                role: "staff",
+                content: "当店では、1日を1泊として計算しております。例えば、1月1日から最短プランの7日間でご契約いただいた場合、1月8日までご利用可能です。また、朝のお貸出から夕方のご返却の場合でも、料金に変更はございません。詳細はメニュー画面の「セルフ御見積」からご確認ください。"
+            },
+            {
+                role: "user",
+                content: "お支払いのタイミングは？"
+            },
+            {
+                role: "staff",
+                content: "車両お引渡し時にクレジットカード決済となります💳 現金決済は原則として承っておりません。"
+            },
+            {
+                role: "user",
+                content: "石巻以外に店舗はありますか？"
+            },
+            {
+                role: "staff",
+                content: "現時点では、宮城県内において石巻店のみの営業となっております。"
+            },
+            {
+                role: "user",
+                content: "いつなら空きがありますか？"
+            },
+            {
+                role: "staff",
+                content: "現在ご利用頂いているお客様のご返却状況が未定のうちは新規ご予約をお取りしておりません。ご利用日の概ね10日前を目安にお問い合わせ頂けるとご案内できることが多いです😓"
+            },
+            {
+                role: "user",
+                content: "1年くらい借りたいです。"
+            },
+            {
+                role: "staff",
+                content: "1年でのご契約は可能です。但し、車検🔧やスタッドレスタイヤ脱着🌨️の際には、店舗にご来店の上、車両の入れ替え、タイヤ交換等がございます。予めご了承ください。"
+            },
+            {
+                role: "user",
+                content: "喫煙車ありますか？"
+            },
+            {
+                role: "staff",
+                content: "当店のレンタカーは全車両禁煙車でございます🚭"
+            },
+            {
+                role: "user",
+                content: "ペットと一緒に乗っていいですか？"
+            },
+            {
+                role: "staff",
+                content: "ペット同乗による、臭い・汚れが発生した場合、別途特別清掃料を頂きます。ペットの同乗はご遠慮ください🐕🚫"
+            },
+            {
+                role: "user",
+                content: "配送サービスについて教えてください。"
+            },
+            {
+                role: "staff",
+                content: "30日以上のご利用を対象に、宮城県内全域への無料配送を承っております。配送可能時間帯は、水曜を除く平日10時～17時です。なお、ご返却の際はJBレンタカー石巻店までお越しいただく必要がございます。"
+            },
+            {
+                role: "user",
+                content: "走行制限は？"
+            },
+            {
+                role: "staff",
+                content: "ご利用日数に応じて以下の走行距離制限がございます：\n・24時間：300㎞\n・1週間：1,000㎞\n・14～30日間：3,000㎞\n制限を超えて走行された場合、1㎞あたり10円の追加料金を申し受けます。"
+            }
+        ];
+
+        // Function to create message elements
+        function createMessageElement(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${message.role === 'user' ? 'user-message' : 'staff-message'} clearfix`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = message.content.replace(/\n/g, '<br>');
+            
+            messageDiv.appendChild(contentDiv);
+            
+            return messageDiv;
+        }
+
+        // Function to display messages
+        function displayMessages() {
+            const chatContainer = document.getElementById('chat');
+            
+            messages.forEach(message => {
+                const messageElement = createMessageElement(message);
+                chatContainer.appendChild(messageElement);
+            });
+            
+            // Auto scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Initialize chat
+        window.onload = function() {
+            displayMessages();
+        };
+    </script>
+</body>
+</html>
