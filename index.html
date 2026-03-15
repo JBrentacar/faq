@@ -3,278 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JBレンタカー FAQ</title>
+    <title>よくあるご質問 - JBレンタカー石巻店</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            background: #f0f4f8;
             color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+
         header {
-            background-color: #005cb9;
-            color: white;
-            padding: 20px 0;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, #0068e9, #0051b5);
+            padding: 20px 16px 24px;
             text-align: center;
-            border-radius: 8px;
-        }
-        h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        .subtitle {
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 5px;
-        }
-        .category {
-            margin-top: 40px;
-            margin-bottom: 20px;
-            padding-left: 15px;
-            border-left: 5px solid #005cb9;
-            font-size: 20px;
-            font-weight: bold;
-            color: #005cb9;
-        }
-        .faq-list {
-            list-style: none;
-            padding: 0;
-        }
-        .faq-item {
-            background-color: white;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            padding: 25px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .faq-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .question {
-            font-weight: bold;
-            font-size: 18px;
-            color: #005cb9;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .question:before {
-            content: "Q";
-            background-color: #005cb9;
             color: white;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-            font-size: 16px;
         }
-        .answer {
-            padding-left: 43px;
-            position: relative;
-            margin-top: 10px;
-        }
-        .answer:before {
-            content: "A";
-            background-color: #ff6b6b;
-            color: white;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            left: 0;
-            font-size: 16px;
-        }
-        .highlight {
-            background-color: #ffefef;
-            padding: 3px 6px;
-            border-radius: 4px;
-            margin: 2px 0;
-            display: inline-block;
-        }
-        .list-item {
+
+        header img {
+            max-width: 90px;
             margin-bottom: 8px;
         }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #777;
+
+        header h1 {
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: .05em;
+        }
+
+        header p {
+            font-size: 13px;
+            opacity: .85;
+            margin-top: 4px;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 14px 60px;
+        }
+
+        /* カテゴリラベル */
+        .category-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0068e9;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin: 24px 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #d0daea;
+        }
+
+        /* FAQアイテム（アコーディオン） */
+        .faq-item {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-align: left;
+            font-family: inherit;
             font-size: 14px;
-            padding-bottom: 30px;
+            font-weight: 700;
+            color: #333;
+            transition: background .15s;
         }
-        a {
-            color: #0066cc;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.2s;
+
+        .faq-question:active { background: #f5f8ff; }
+
+        .q-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #0068e9, #0051b5);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
-        a:hover {
-            color: #004499;
-            text-decoration: underline;
+
+        .q-text { flex: 1; line-height: 1.45; }
+
+        .faq-chevron {
+            color: #bbb;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: transform .25s;
         }
-        .warning {
-            color: #e74c3c;
-            font-weight: bold;
+
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            .faq-item {
-                padding: 20px;
-            }
-            .question {
-                font-size: 16px;
-            }
+
+        .faq-answer {
+            display: none;
+            padding: 0 18px 16px 58px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+            border-top: 1px solid #f0f4f8;
         }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-answer .a-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #ff6b6b, #e74c3c);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            vertical-align: middle;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .warning { color: #e74c3c; font-weight: 700; }
+
+        .list-row {
+            margin: 4px 0;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #0068e9, #0051b5);
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        footer a { color: rgba(255,255,255,.8); text-decoration: underline; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>JBレンタカー 石巻店</h1>
-            <div class="subtitle">よくあるご質問</div>
-        </header>
 
-        <div class="category">ご利用期間・料金について</div>
-        <ul class="faq-list">
-            <li class="faq-item">
-                <div class="question">何日間から借りられるの？</div>
-                <div class="answer">
-                    当店は中長期専門のレンタカーでございます。そのため、<span class="highlight">7日間以上</span>からのご利用を承っております。
-                </div>
-            </li>
+<header>
+    <img src="https://jbrentacar.github.io/home/logo.png" alt="JBレンタカー石巻店">
+    <h1>よくあるご質問</h1>
+    <p>JBレンタカー石巻店</p>
+</header>
 
-            <li class="faq-item">
-                <div class="question">料金の計算方法について教えてください。</div>
-                <div class="answer">
-                    当店では、1日を1泊として計算しております。例えば、1月1日から最短プランの7日間でご契約いただいた場合、1月8日までご利用可能です。また、朝のお貸出から夕方のご返却の場合でも、料金に変更はございません。詳細は<a href="https://jbrentacar.github.io/FeeCalculation/" target="_blank">セルフ御見積</a>からご確認ください。
-                </div>
-            </li>
+<main>
 
-            <li class="faq-item">
-                <div class="question">お支払いのタイミングは？</div>
-                <div class="answer">
-                   車両お引渡し時にクレジットカード決済となります💳 <span class="highlight">2025年4月より原則として暗証番号の入力がない場合、クレジットカードはご利用できません。
-暗証番号がわからないお客様は、予めお持ちのクレジットカードの発行会社にお問い合わせください。なお、現金決済は原則として承っておりません。</span>
-                </div>
-            </li>
+    <!-- ご利用期間・料金 -->
+    <div class="category-label"><i class="fas fa-yen-sign"></i> ご利用期間・料金</div>
 
-            <li class="faq-item">
-                <div class="question">途中で返却する場合、料金はどうなりますか？</div>
-                <div class="answer">
-                    <span class="warning">途中返却された場合でも、返金はいたしかねますので</span>、予めご了承ください。
-                </div>
-            </li>
-
-            <li class="faq-item">
-                <div class="question">キャンセルはできますか？</div>
-                <div class="answer">
-                    キャンセルは可能ですが、<span class="highlight">ご利用開始日の7日前からキャンセル料金が発生</span>致します。詳細はご契約時の約款をご確認ください。
-                </div>
-            </li>
-
-            <li class="faq-item">
-                <div class="question">走行制限は？</div>
-                <div class="answer">
-                    ご利用日数に応じて以下の走行距離制限がございます：
-                    <div class="list-item">・24時間：300㎞</div>
-                    <div class="list-item">・1週間：1,000㎞</div>
-                    <div class="list-item">・14～30日間：3,000㎞</div>
-                    制限を超えて走行された場合、<span class="highlight">1㎞あたり10円の追加料金</span>を申し受けます。
-                </div>
-            </li>
-        </ul>
-
-        <div class="category">車両について</div>
-        <ul class="faq-list">
-            <li class="faq-item">
-                <div class="question">4駆の車はありますか？</div>
-                <div class="answer">
-                    基本的には2駆仕様をご案内しておりますが、4駆をご希望の場合はお気軽にお申し付けください。なお、空き状況によってはご期待に添えない場合がございますので、ご了承ください。
-                </div>
-            </li>
-
-            <li class="faq-item">
-                <div class="question">喫煙車ありますか？</div>
-                <div class="answer">
-                    当店のレンタカーは<span class="highlight">全車両禁煙車</span>でございます🚭
-                </div>
-            </li>
-
-            <li class="faq-item">
-                <div class="question">ISOFIX対応車やチャイルドシートの貸出はある？</div>
-                <div class="answer">
-                    ISOFIX対応車をご用意しております。詳細は事前にお問い合わせください。ただし、<span class="warning">チャイルドシートの貸出は行っておりません</span>ので、お客様ご自身でご準備をお願いいたします。
-                </div>
-            </li>
-        </ul>
-
-        <div class="category">ご利用条件について</div>
-        <ul class="faq-list">
-            <li class="faq-item">
-                <div class="question">運転できる人数は？料金変わる？</div>
-                <div class="answer">
-                    運転免許証をご提示いただいた方全員が運転可能です。運転人数に伴う料金の変更はございません。ただし、<span class="warning">運転免許証をご提示いただいていない方が運転された場合の事故等は補償の対象外</span>となりますのでご注意ください。
-                </div>
-            </li>
-
-            <li class="faq-item">
-                <div class="question">ペットと一緒に乗っていいですか？</div>
-                <div class="answer">
-                    ペット同乗による、臭い・汚れが発生した場合、<span class="highlight">別途特別清掃料</span>を頂きます。ペットの同乗はご遠慮ください🐕🚫
-                </div>
-            </li>
-            
-            <li class="faq-item">
-                <div class="question">1年くらい借りたいです。</div>
-                <div class="answer">
-                    1年でのご契約は可能です。但し、車検やスタッドレスタイヤ脱着の際には、<span class="highlight">店舗にご来店の上、車両の入れ替え、タイヤ交換等</span>がございます。予めご了承ください。
-                </div>
-            </li>
-        </ul>
-
-        <div class="category">店舗・サービスについて</div>
-        <ul class="faq-list">
-            <li class="faq-item">
-                <div class="question">石巻以外に店舗はありますか？</div>
-                <div class="answer">
-                    現時点では、宮城県内において石巻店のみの営業となっております。
-                </div>
-            </li>
-
-            <li class="faq-item">
-                <div class="question">いつなら空きがありますか？</div>
-                <div class="answer">
-                    現在ご利用頂いているお客様のご返却状況が未定のうちは新規ご予約をお取りしておりません。ご利用日の概ね<span class="highlight">10日前を目安</span>にお問い合わせ頂けるとご案内できることが多いです😓
-                </div>
-            </li>
-
-            <li class="faq-item">
-                <div class="question">配送サービスについて教えてください。</div>
-                <div class="answer">
-                    <span class="highlight">30日以上のご利用</span>を対象に、宮城県内全域への無料配送を承っております。配送可能時間帯は、水曜を除く平日10時～17時です。なお、ご返却の際はJBレンタカー石巻店までお越しいただく必要がございます。
-                </div>
-            </li>
-        </ul>
-
-        <footer>
-            © JBレンタカー 石巻店 | <a href="https://jbrentacar.github.io/FeeCalculation/" target="_blank">料金シミュレーション</a>
-        </footer>
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">何日間から借りられるの？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>当店は中長期専門のレンタカーです。<span class="highlight">7日間以上</span>からご利用いただけます。
+        </div>
     </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">料金の計算方法を教えてください。</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>1日を1泊として計算します。例えば1月1日から7日間ご契約の場合、1月8日までご利用可能です。朝の貸出・夕方の返却でも料金は変わりません。詳細は<a href="https://jbrentacar.github.io/FeeCalculation/" target="_blank" style="color:#0068e9;font-weight:700;">料金シミュレーション</a>でご確認ください。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">お支払いのタイミングは？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>車両お引渡し時にクレジットカード決済となります。<br><br>
+            <span class="highlight">2025年4月より、暗証番号の入力がない場合はクレジットカードをご利用いただけません。</span>暗証番号がご不明の場合は、カード発行会社へお問い合わせください。なお、現金決済は原則承っておりません。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">途中で返却した場合、料金は返金されますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span><span class="warning">途中返却された場合でも、返金はいたしかねます。</span>予めご了承ください。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">キャンセルはできますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>キャンセルは可能ですが、<span class="highlight">ご利用開始日の7日前からキャンセル料が発生</span>します。詳細はご契約時の約款をご確認ください。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">走行距離の制限はありますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>ご利用日数に応じた走行距離制限があります。<br><br>
+            <div class="list-row">・24時間：300㎞</div>
+            <div class="list-row">・1週間：1,000㎞</div>
+            <div class="list-row">・14〜30日間：3,000㎞</div>
+            <br>制限を超えた場合、<span class="highlight">1㎞あたり10円の追加料金</span>が発生します。
+        </div>
+    </div>
+
+    <!-- 車両について -->
+    <div class="category-label"><i class="fas fa-car"></i> 車両について</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">4WDの車はありますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>基本的には2WD車をご案内しています。4WDをご希望の場合はお申し付けください。空き状況によりご希望に添えない場合もございます。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">喫煙車はありますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>当店のレンタカーは<span class="highlight">全車両禁煙</span>です。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">ISOFIX対応車やチャイルドシートの貸出はありますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>ISOFIX対応車をご用意しています。詳細は事前にお問い合わせください。<br>なお、<span class="warning">チャイルドシートの貸出は行っていません</span>ので、お客様ご自身でご準備をお願いします。
+        </div>
+    </div>
+
+    <!-- ご利用条件 -->
+    <div class="category-label"><i class="fas fa-file-contract"></i> ご利用条件</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">運転できる人数は？料金は変わりますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>運転免許証をご提示いただいた方全員が運転可能です。人数による料金変更はありません。<br><br>
+            <span class="warning">免許証をご提示いただいていない方が運転された場合の事故は補償対象外</span>となりますのでご注意ください。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">ペットと一緒に乗っていいですか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>ペットの同乗はご遠慮ください。臭い・汚れが発生した場合は<span class="highlight">別途特別清掃料</span>をいただきます。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">1年間借りたいのですが可能ですか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>1年間のご契約は可能です。ただし、車検やスタッドレスタイヤの脱着時には<span class="highlight">店舗への来店と車両入れ替え</span>が必要です。予めご了承ください。
+        </div>
+    </div>
+
+    <!-- 店舗・サービス -->
+    <div class="category-label"><i class="fas fa-store"></i> 店舗・サービス</div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">石巻以外に店舗はありますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>現在は宮城県内において石巻店のみの営業です。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">いつなら空きがありますか？</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span>現在ご利用中のお客様のご返却状況が未定の間は新規予約をお取りしていません。<span class="highlight">ご利用希望日の10日前を目安</span>にお問い合わせいただくとご案内できることが多いです。
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+            <div class="q-badge">Q</div>
+            <div class="q-text">配送サービスについて教えてください。</div>
+            <i class="fas fa-chevron-down faq-chevron"></i>
+        </button>
+        <div class="faq-answer">
+            <span class="a-badge">A</span><span class="highlight">30日以上のご利用</span>を対象に、宮城県内全域への無料配送を承っています。配送可能時間は水曜を除く平日10時〜17時です。<br><br>
+            なお、ご返却の際はJBレンタカー石巻店までお越しいただく必要があります。
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    &copy; 2025 JBレンタカー石巻店<br>
+    <a href="https://jbrentacar.github.io/FeeCalculation/" target="_blank">料金シミュレーション</a>
+</footer>
+
+<script>
+    function toggle(btn) {
+        const item = btn.closest('.faq-item');
+        item.classList.toggle('open');
+    }
+</script>
+
 </body>
 </html>
